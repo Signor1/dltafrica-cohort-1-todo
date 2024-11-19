@@ -17,8 +17,8 @@ const CreateTodoModal = () => {
 
     const { title, description } = fields;
 
-    const handleSubmit = async () => {
-        await handleCreateNewTodo(title, description);
+    const handleSubmit = () => {
+        handleCreateNewTodo(title, description);
         setFields({ title: "", description: "" });
     }
 

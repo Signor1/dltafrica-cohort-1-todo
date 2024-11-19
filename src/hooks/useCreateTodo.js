@@ -41,7 +41,7 @@ const useCreateTodo = () => {
           gasLimit: (estimatedGas * BigInt(120)) / BigInt(100),
         });
 
-        const receipt = tx.wait();
+        const receipt = await tx.wait();
 
         if (receipt.status === 1) {
           toast.success("Todo created successfully");
