@@ -1,8 +1,11 @@
 import { Dialog, Button, Flex, Text, TextField, TextArea } from "@radix-ui/themes"
 import { useState } from "react"
+import useCreateTodo from "../hooks/useCreateTodo";
 
 
 const CreateTodoModal = () => {
+    const handleCreateNewTodo = useCreateTodo();
+
     const [fields, setFields] = useState({
         title: "",
         description: "",
@@ -14,8 +17,9 @@ const CreateTodoModal = () => {
 
     const { title, description } = fields;
 
-    const handleSubmit = () => {
-
+    const handleSubmit = async () => {
+        await handleCreateNewTodo(title, description);
+        setFields({ title: "", description: "" });
     }
 
     return (

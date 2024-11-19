@@ -1,3 +1,5 @@
+import { ToastContainer } from "react-toastify"
+import 'react-toastify/dist/ReactToastify.css';
 
 const Layouts = ({ children }) => {
     return (
@@ -14,6 +16,7 @@ const Layouts = ({ children }) => {
             <footer className="w-full h-20 flex justify-center items-center bg-stone-800">
                 <p className="text-stone-300">Todo Dapp &copy; 2024. All Right Reserved.</p>
             </footer>
+            <ToastContainer theme="dark" position="top-right" />
         </main>
     )
 }
