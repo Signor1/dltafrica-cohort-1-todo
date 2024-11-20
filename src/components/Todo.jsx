@@ -1,7 +1,24 @@
 import { AlertDialog, Box, Button, Card, Dialog, Flex, Text, TextArea, TextField } from "@radix-ui/themes"
+import { useState } from "react";
 
 
-const Todo = () => {
+const Todo = ({ todo, index }) => {
+    const { title, description, status } = todo;
+
+    const [newFields, setNewFields] = useState({
+        newtitle: title || "",
+        newdescription: description || "",
+    })
+
+    const handleChange = (name, e) => {
+        setNewFields((prevState) => ({ ...prevState, [name]: e.target.value }));
+    }
+    const { newtitle, newdescription } = newFields;
+
+    const handleTodoUpdate = (index) => {
+        const num = Number(index);
+        console.log({ index: num, title: newtitle, description: newdescription });
+    }
     return (
         <Box className="w-full">
             <Card variant="surface" >
@@ -10,19 +27,19 @@ const Todo = () => {
                         Title
                     </Text>
                     <Text as="div" color="gray" size="2">
-                        Reading
+                        {title}
                     </Text>
                     <Text as="div" size="2" weight="bold">
                         Description
                     </Text>
                     <Text as="div" color="gray" size="2">
-                        I need to read by 7pm ahead of Nethermind interview.
+                        {description}
                     </Text>
                     <Text as="div" size="2" weight="bold">
                         Status
                     </Text>
                     <Text as="div" color="gray" size="2">
-                        Created
+                        {status}
                     </Text>
                 </Flex>
 
@@ -72,13 +89,18 @@ const Todo = () => {
                                     </Text>
                                     <TextField.Root
                                         placeholder="Enter title"
+                                        value={newtitle}
+                                        onChange={(e) => handleChange("newtitle", e)}
                                     />
                                 </label>
                                 <label>
                                     <Text as="div" size="2" mb="1" weight="bold">
                                         Todo Description
                                     </Text>
-                                    <TextArea placeholder="Enter description" />
+                                    <TextArea
+                                        placeholder="Enter description"
+                                        value={newdescription}
+                                        onChange={(e) => handleChange("newdescription", e)} />
                                 </label>
                             </Flex>
 
@@ -89,7 +111,7 @@ const Todo = () => {
                                     </Button>
                                 </Dialog.Close>
 
-                                <Button >Update</Button>
+                                <Button onClick={() => handleTodoUpdate(index)} >Update</Button>
 
                             </Flex>
                         </Dialog.Content>

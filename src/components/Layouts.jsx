@@ -3,7 +3,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const Layouts = ({ children }) => {
     return (
-        <main className="w-full h-screen flex flex-col justify-between bg-stone-950">
+        <main className="w-full min-h-screen flex flex-col justify-between bg-stone-950">
             {/* header */}
             <div className="w-full h-20 flex justify-between items-center px-4 border-b border-stone-400 bg-stone-950 rounded-e-lg">
                 <h3 className="text-lg font-medium text-amber-600 ">Todo Dapp</h3>
