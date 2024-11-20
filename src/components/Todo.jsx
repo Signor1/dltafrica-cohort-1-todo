@@ -1,8 +1,12 @@
 import { AlertDialog, Box, Button, Card, Dialog, Flex, Text, TextArea, TextField } from "@radix-ui/themes"
 import { useState } from "react";
+import useUpdateTodo from "../hooks/useUpdateTodo";
 
 
 const Todo = ({ todo, index }) => {
+
+    const handleTodoEdit = useUpdateTodo();
+
     const { title, description, status } = todo;
 
     const [newFields, setNewFields] = useState({
@@ -15,9 +19,13 @@ const Todo = ({ todo, index }) => {
     }
     const { newtitle, newdescription } = newFields;
 
-    const handleTodoUpdate = (index) => {
-        const num = Number(index);
-        console.log({ index: num, title: newtitle, description: newdescription });
+    const handleTodoUpdate = (value) => {
+        const index = Number(value);
+        handleTodoEdit(index, newtitle, newdescription);
+        setNewFields({
+            newtitle,
+            newdescription,
+        })
     }
     return (
         <Box className="w-full">
@@ -110,9 +118,9 @@ const Todo = ({ todo, index }) => {
                                         Cancel
                                     </Button>
                                 </Dialog.Close>
-
-                                <Button onClick={() => handleTodoUpdate(index)} >Update</Button>
-
+                                <Dialog.Close>
+                                    <Button onClick={() => handleTodoUpdate(index)} >Update</Button>
+                                </Dialog.Close>
                             </Flex>
                         </Dialog.Content>
                     </Dialog.Root>
