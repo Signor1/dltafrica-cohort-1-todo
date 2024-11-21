@@ -51,12 +51,10 @@ const useCreateTodo = () => {
 
         toast.error("Failed to create todo");
         return;
-      } catch (error) {
+      } catch (err) {
         const errorDecoder = ErrorDecoder.create();
-        const decodedError = await errorDecoder.decode(error);
-
-        console.error("Error from creating todo", decodedError);
-        toast.error(decodedError.reason);
+        const { reason } = await errorDecoder.decode(err);
+        toast.error(reason);
       }
     },
     [contract, address, chainId]
