@@ -1,5 +1,98 @@
 [
     {
+        "inputs": [],
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint8",
+                "name": "index",
+                "type": "uint8"
+            },
+            {
+                "indexed": false,
+                "internalType": "enum TodoList.Status",
+                "name": "status",
+                "type": "uint8"
+            }
+        ],
+        "name": "TodoCompleted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "enum TodoList.Status",
+                "name": "status",
+                "type": "uint8"
+            }
+        ],
+        "name": "TodoCreated",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint8",
+                "name": "index",
+                "type": "uint8"
+            }
+        ],
+        "name": "TodoDeleted",
+        "type": "event"
+    },
+    {
+        "anonymous": false,
+        "inputs": [
+            {
+                "indexed": false,
+                "internalType": "uint8",
+                "name": "index",
+                "type": "uint8"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "title",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "string",
+                "name": "description",
+                "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "enum TodoList.Status",
+                "name": "status",
+                "type": "uint8"
+            }
+        ],
+        "name": "TodoUpdated",
+        "type": "event"
+    },
+    {
         "inputs": [
             {
                 "internalType": "string",
@@ -32,97 +125,6 @@
             }
         ],
         "name": "deleteTodo",
-        "outputs": [],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint8",
-                "name": "_index",
-                "type": "uint8"
-            }
-        ],
-        "name": "todoCompleted",
-        "outputs": [
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "nonpayable",
-        "type": "function"
-    },
-    {
-        "inputs": [],
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "title",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "enum TodoList.Status",
-                "name": "status",
-                "type": "uint8"
-            }
-        ],
-        "name": "TodoCreated",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [],
-        "name": "TodoDeleted",
-        "type": "event"
-    },
-    {
-        "anonymous": false,
-        "inputs": [
-            {
-                "indexed": false,
-                "internalType": "string",
-                "name": "title",
-                "type": "string"
-            },
-            {
-                "indexed": false,
-                "internalType": "enum TodoList.Status",
-                "name": "status",
-                "type": "uint8"
-            }
-        ],
-        "name": "TodoUpdated",
-        "type": "event"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "uint8",
-                "name": "_index",
-                "type": "uint8"
-            },
-            {
-                "internalType": "string",
-                "name": "_title",
-                "type": "string"
-            },
-            {
-                "internalType": "string",
-                "name": "_desc",
-                "type": "string"
-            }
-        ],
-        "name": "updateTodo",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -202,6 +204,25 @@
     {
         "inputs": [
             {
+                "internalType": "uint8",
+                "name": "_index",
+                "type": "uint8"
+            }
+        ],
+        "name": "todoCompleted",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
@@ -226,6 +247,29 @@
             }
         ],
         "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint8",
+                "name": "_index",
+                "type": "uint8"
+            },
+            {
+                "internalType": "string",
+                "name": "_title",
+                "type": "string"
+            },
+            {
+                "internalType": "string",
+                "name": "_desc",
+                "type": "string"
+            }
+        ],
+        "name": "updateTodo",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     }
 ]

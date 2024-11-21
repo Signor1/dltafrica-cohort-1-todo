@@ -3,21 +3,14 @@ import useContractInstance from "./useContractInstance";
 import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { toast } from "react-toastify";
 import { baseSepolia } from "@reown/appkit/networks";
-import { ErrorDecoder } from "ethers-decode-error";
-import ABI from "../ABI/todo.json";
 
-const useCreateTodo = () => {
+const useDeleteTodo = () => {
   const contract = useContractInstance(true);
   const { address } = useAppKitAccount();
   const { chainId } = useAppKitNetwork();
 
   return useCallback(
-    async (title, description) => {
-      if (!title || !description) {
-        toast.error("Title and description are required");
-        return;
-      }
-
+    async (index) => {
       if (!address) {
         toast.error("Please connect your wallet");
         return;
@@ -34,34 +27,27 @@ const useCreateTodo = () => {
       }
 
       try {
-        const estimatedGas = await contract.createTodo.estimateGas(
-          title,
-          description
-        );
+        const estimatedGas = await contract.deleteTodo.estimateGas(index);
 
-        const tx = await contract.createTodo(title, description, {
+        const tx = await contract.deleteTodo(index, {
           gasLimit: (estimatedGas * BigInt(120)) / BigInt(100),
         });
 
         const receipt = await tx.wait();
 
         if (receipt.status === 1) {
-          toast.success("Todo created successfully");
+          toast.success("Todo deleted successfully");
           return;
         }
-
-        toast.error("Failed to create todo");
+        toast.error("Failed to delete todo");
         return;
       } catch (error) {
-        const errorDecoder = ErrorDecoder.create([ABI]);
-        const decodedError = await errorDecoder.decode(error);
-
-        console.error("Error from creating todo", decodedError);
-        toast.error(decodedError.reason);
+        console.error("Error deleting todo:", error);
+        toast.error("Failed to delete todo");
       }
     },
-    [contract, address, chainId]
+    [address, contract, chainId]
   );
 };
 
-export default useCreateTodo;
+export default useDeleteTodo;

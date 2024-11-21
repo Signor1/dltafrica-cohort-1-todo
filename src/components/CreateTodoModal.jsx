@@ -62,9 +62,9 @@ const CreateTodoModal = () => {
                                 Cancel
                             </Button>
                         </Dialog.Close>
-
-                        <Button onClick={handleSubmit}>Submit</Button>
-
+                        <Dialog.Close>
+                            <Button onClick={handleSubmit}>Submit</Button>
+                        </Dialog.Close>
                     </Flex>
                 </Dialog.Content>
             </Dialog.Root>
