@@ -3,6 +3,7 @@ import useContractInstance from "./useContractInstance";
 import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { toast } from "react-toastify";
 import { baseSepolia } from "@reown/appkit/networks";
+import { ErrorDecoder } from "ethers-decode-error";
 
 const useDeleteTodo = () => {
   const contract = useContractInstance(true);
@@ -42,8 +43,10 @@ const useDeleteTodo = () => {
         toast.error("Failed to delete todo");
         return;
       } catch (error) {
-        console.error("Error deleting todo:", error);
-        toast.error("Failed to delete todo");
+        const errorDecoder = ErrorDecoder.create();
+        const decodedError = await errorDecoder.decode(error);
+        console.error("Error deleting todo:", decodedError);
+        toast.error(decodedError.reason);
       }
     },
     [address, contract, chainId]

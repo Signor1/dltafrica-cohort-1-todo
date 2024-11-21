@@ -3,6 +3,7 @@ import useContractInstance from "./useContractInstance";
 import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { toast } from "react-toastify";
 import { baseSepolia } from "@reown/appkit/networks";
+import { ErrorDecoder } from "ethers-decode-error";
 
 const useUpdateTodo = () => {
   const contract = useContractInstance(true);
@@ -51,8 +52,10 @@ const useUpdateTodo = () => {
         toast.error("Failed to update todo");
         return;
       } catch (error) {
-        console.error("Error updating todo:", error);
-        toast.error("Failed to update todo");
+        const errorDecoder = ErrorDecoder.create();
+        const decodedError = await errorDecoder.decode(error);
+        console.error("Error updating todo:", decodedError);
+        toast.error(decodedError.reason);
       }
     },
     [address, chainId, contract]

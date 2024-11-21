@@ -4,7 +4,6 @@ import { useAppKitAccount, useAppKitNetwork } from "@reown/appkit/react";
 import { toast } from "react-toastify";
 import { baseSepolia } from "@reown/appkit/networks";
 import { ErrorDecoder } from "ethers-decode-error";
-import ABI from "../ABI/todo.json";
 
 const useCreateTodo = () => {
   const contract = useContractInstance(true);
@@ -53,7 +52,7 @@ const useCreateTodo = () => {
         toast.error("Failed to create todo");
         return;
       } catch (error) {
-        const errorDecoder = ErrorDecoder.create([ABI]);
+        const errorDecoder = ErrorDecoder.create();
         const decodedError = await errorDecoder.decode(error);
 
         console.error("Error from creating todo", decodedError);
